@@ -5,43 +5,64 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f2f2f2;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      background-color: #F5F5F5;
       color: #333333;
       margin: 0;
       padding: 0;
     }
-    #header {
+    header {
       background-color: #663399;
       color: #ffffff;
       text-align: center;
       padding: 20px;
     }
-    #chart {
+    header h1 {
+      font-size: 48px;
+      margin: 0;
+      text-transform: uppercase;
+    }
+    .container {
+      margin: 0 auto;
+      max-width: 1200px;
+      padding: 20px;
+    }
+    .chart {
       background-color: #ffffff;
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       margin: 20px auto;
-      max-width: 800px;
       padding: 20px;
     }
-    #countdown {
-      text-align: center;
+    .chart h2 {
       font-size: 36px;
-      margin: 20px;
+      margin: 0 0 20px;
+      text-align: center;
+      text-transform: uppercase;
+    }
+    .countdown {
+      font-size: 48px;
+      margin: 20px 0;
+      text-align: center;
+    }
+    .countdown span {
+      font-size: 24px;
+      text-transform: uppercase;
     }
   </style>
 </head>
 <body>
-  <div id="header">
+  <header>
     <h1>Taylor Swift Eras Tour Santa Clara</h1>
-  </div>
-  <div id="chart">
-    <h2>Lowest Prices for Floor Seats Over Time</h2>
-    <canvas id="priceChart"></canvas>
-  </div>
-  <div id="countdown">
-    <span id="days"></span> days, <span id="hours"></span> hours, <span id="minutes"></span> minutes, <span id="seconds"></span> seconds until the concert!
+  </header>
+  <div class="container">
+    <div class="chart">
+      <h2>Lowest Prices for Floor Seats Over Time</h2>
+      <canvas id="priceChart"></canvas>
+    </div>
+    <div class="countdown">
+      <span id="days"></span> Days, <span id="hours"></span> Hours, <span id="minutes"></span> Minutes, <span id="seconds"></span> Seconds Until the Concert!
+    </div>
   </div>
   <script>
     // Read the data from the JSON file
@@ -74,7 +95,7 @@
             scales: {
               xAxes: [{
                 type: "linear",
-                ticks: {
+                ticks:
                   callback: (value, index, values) => {
                     const minutes = Math.floor(value / 60);
                     const seconds = Math.floor(value % 60);
@@ -94,8 +115,16 @@
                 },
                 scaleLabel: {
                   display: true,
-              }
-            }]
+                  labelString: "Ticket Price"
+                }
+              }]
+            },
+            legend: {
+              display: false
+            },
+            title: {
+              display: false
+            }
           }
         });
 

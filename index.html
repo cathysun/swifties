@@ -1,9 +1,118 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Hello, world!</title>
+  <title>Taylor Swift Eras Tour Santa Clara</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      color: #333333;
+      margin: 0;
+      padding: 0;
+    }
+    #header {
+      background-color: #663399;
+      color: #ffffff;
+      text-align: center;
+      padding: 20px;
+    }
+    #chart {
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      margin: 20px auto;
+      max-width: 800px;
+      padding: 20px;
+    }
+    #countdown {
+      text-align: center;
+      font-size: 36px;
+      margin: 20px;
+    }
+  </style>
 </head>
 <body>
-  <h1>Hello, world!</h1>
+  <div id="header">
+    <h1>Taylor Swift Eras Tour Santa Clara</h1>
+  </div>
+  <div id="chart">
+    <h2>Lowest Prices for Floor Seats Over Time</h2>
+    <canvas id="priceChart"></canvas>
+  </div>
+  <div id="countdown">
+    <span id="days"></span> days, <span id="hours"></span> hours, <span id="minutes"></span> minutes, <span id="seconds"></span> seconds until the concert!
+  </div>
+  <script>
+    // Read the data from the JSON file
+    fetch("ticket_prices.json")
+      .then(response => response.json())
+      .then(data => {
+        // Set the concert time as a Date object in the Pacific Timezone
+        const concertTime = new Date("July 28, 2023 18:30:00 GMT-0700");
+
+        // Convert the time data to a countdown from the concert time
+        data.forEach(datum => {
+          const timeUntilConcert = new Date(datum.time_until_concert * 1000);
+          const countdown = (concertTime - timeUntilConcert) / 1000;
+          datum.countdown = countdown;
+        });
+
+        // Create the chart using Chart.js
+        const ctx = document.getElementById("priceChart").getContext("2d");
+        const chart = new Chart(ctx, {
+          type: "line",
+          data: {
+            datasets: [{
+              label: "Ticket Price",
+              data: data.map(datum => ({ x: datum.countdown, y: parseFloat(datum.price.replace(",", "")) })),
+              borderColor: "rgb(255, 99, 132)",
+              fill: false
+            }]
+          },
+          options: {
+            scales: {
+              xAxes: [{
+                type: "linear",
+                ticks: {
+                  callback: (value, index, values) => {
+                    const minutes = Math.floor(value / 60);
+                    const seconds = Math.floor(value % 60);
+                    return `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+                  }
+                },
+                scaleLabel: {
+                  display: true,
+                  labelString: "Time Until Concert"
+                }
+              }],
+              yAxes: [{
+                ticks: {
+                  callback: (value, index, values) => {
+                    return `$${value.toFixed(2)}`;
+                  }
+                },
+                scaleLabel: {
+                  display: true,
+              }
+            }]
+          }
+        });
+
+        // Update the countdown every second
+        setInterval(() => {
+          const now = new Date();
+          const timeUntilConcert = new Date(concertTime - now);
+          const days = Math.floor(timeUntilConcert / (1000 * 60 * 60 * 24));
+          const hours = Math.floor(timeUntilConcert / (1000 * 60 * 60)) % 24;
+          const minutes = Math.floor(timeUntilConcert / (1000 * 60)) % 60;
+          const seconds = Math.floor(timeUntilConcert / 1000) % 60;
+          document.getElementById("days").textContent = days;
+          document.getElementById("hours").textContent = hours.toString().padStart(2, "0");
+          document.getElementById("minutes").textContent = minutes.toString().padStart(2, "0");
+          document.getElementById("seconds").textContent = seconds.toString().padStart(2, "0");
+        }, 1000);
+      });
+  </script>
 </body>
 </html>

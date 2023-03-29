@@ -1,33 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="style.css">
     <title>Taylor Swift Eras Tour Santa Clara</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f7ecec;
-        }
 
-        table {
-            margin: 0 auto;
-            border-collapse: collapse;
-            border: 1px solid #ddd;
-        }
-
-        th, td {
-            padding: 8px;
-            border: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #f2f2f2;
-            font-weight: bold;
-        }
-    </style>
 </head>
 <body>
-    <h1>Taylor Swift Eras Tour Santa Clara</h1>
+<div id="table-container">
+    <h1>Taylor Swift Eras Tour</h1>
+    <h2>Santa Clara - July 28th, 2023 at 6:30PM</h2>
     <table>
         <tr>
             <th>Time</th>
@@ -39,7 +20,7 @@
     <script>
         function updateTimeRemaining() {
             // Get the JSON data
-            fetch("ticket_prices.json")
+            fetch("ticket_prices_multiple.json")
                 .then(response => response.json())
                 .then(data => {
                     // Update the table
@@ -70,5 +51,6 @@
         // Update the table every 5 seconds
         setInterval(updateTimeRemaining, 5000);
     </script>
+</div>
 </body>
 </html>

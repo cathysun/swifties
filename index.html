@@ -30,16 +30,13 @@
     <h1>Taylor Swift Eras Tour Santa Clara</h1>
     <table>
         <tr>
-            <th>Time Until Concert</th>
+            <th>Time</th>
             <th>Price</th>
         </tr>
         <tbody id="table-body">
         </tbody>
     </table>
     <script>
-        // Set the time of the concert
-        const concertTime = new Date("July 28, 2023 18:30:00 PT");
-
         function updateTimeRemaining() {
             // Get the JSON data
             fetch("ticket_prices.json")
@@ -51,19 +48,14 @@
                     for (let i = 0; i < data.length; i++) {
                         const row = document.createElement("tr");
 
-                        // Convert Unix time to a normal date and time
-                        const scrapeTime = new Date(data[i].time * 1000);
-                        const timeDiff = Math.floor((concertTime - scrapeTime) / 1000);
-                        const days = Math.floor(timeDiff / 86400);
-                        const hours = Math.floor((timeDiff % 86400) / 3600);
-                        const minutes = Math.floor((timeDiff % 3600) / 60);
-                        const seconds = timeDiff % 60;
+                        // Format the time in PT
+                        const timeString = new Date(data[i].time * 1000)
+                            .toLocaleString("en-US", { timeZone: "America/Los_Angeles" });
 
-                        const timeRemaining = `${days}d ${hours}h ${minutes}m ${seconds}s`;
                         const price = `$${data[i].price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}`;
 
                         const timeCell = document.createElement("td");
-                        timeCell.textContent = timeRemaining;
+                        timeCell.textContent = timeString;
                         row.appendChild(timeCell);
 
                         const priceCell = document.createElement("td");

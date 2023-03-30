@@ -11,32 +11,25 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
         with:
           ref: main
           fetch-depth: 0
 
-      - name: Set up Node.js 16.x
-        uses: actions/setup-node@v3
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v2
         with:
-          node-version: '16.x'
+          python-version: 3.10
 
       - name: Install Dependencies
         run: |
-          npm install
-          npm audit fix
           pip install -r requirements.txt
 
-      - name: Installed package list
-        run: apt list --installed
-      - name: Remove Chrome
-        run: sudo apt purge google-chrome-stable
-      - name: Remove default Chromium
-        run: sudo apt purge chromium-browser
-      - name: Install a new Chromium
-        run: sudo apt install -y chromium-browser
-      - name: Install all necessary packages
-        run: pip install requests beautifulsoup4 pandas webdriver-manager selenium
+      - name: Install Chromium and necessary packages
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y chromium-browser
+          pip install requests beautifulsoup4 pandas webdriver-manager selenium
 
       - name: Run startmultiple.py Script
         run: python startmultiple.py

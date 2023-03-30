@@ -3,6 +3,7 @@ name: Run startmultiple.py Script Every 10 Minutes
 on:
   schedule:
     - cron: '*/10 * * * *'
+  workflow_dispatch:
 
 jobs:
   build:

@@ -1,12 +1,11 @@
 import json
 import time
 from selenium import webdriver
-from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
 
 # Set up the web driver
 with Service('./chromedriver') as service, webdriver.Chrome(service=service) as driver:
-
     # Set the URL of the page to scrape
     urls = [
         "https://www.stubhub.com/taylor-swift-santa-clara-tickets-7-28-2023/event/151197002/?quantity=2&sections=1543880&ticketClasses=1524&seatTypes=&listingQty=",

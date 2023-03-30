@@ -1,4 +1,4 @@
-name: Run Main Script Every 10 Minutes
+name: Run startmultiple.py Script Every 10 Minutes
 
 on:
   schedule:
@@ -21,5 +21,13 @@ jobs:
       run: |
         pip install -r requirements.txt
 
-    - name: Run Main Script
+    - name: Run startmultiple.py Script
       run: python startmultiple.py
+
+    - name: Commit changes
+      run: |
+        git config --local user.email "actions@github.com"
+        git config --local user.name "GitHub Actions"
+        git add <path-to-json-file>
+        git commit -m "Update JSON file"
+        git push

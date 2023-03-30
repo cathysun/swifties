@@ -2,7 +2,7 @@ name: Run startmultiple.py Script Every 10 Minutes
 
 on:
   schedule:
-    - cron: '*/10 * * * *'
+    - cron: '*/5 * * * *'
 
 jobs:
   build:

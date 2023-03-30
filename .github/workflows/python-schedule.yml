@@ -10,22 +10,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v3
-      with:
-        ref: main
-        fetch-depth: 0
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          ref: main
+          fetch-depth: 0
 
-    - name: Set up Node.js 16.x
-      uses: actions/setup-node@v3
-      with:
-        node-version: '16.x'
+      - name: Set up Node.js 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
 
-- name: Install Dependencies
-  run: |
-    npm install
-    npm audit fix
-    pip install -r requirements.txt
+      - name: Install Dependencies
+        run: |
+          npm install
+          npm audit fix
+          pip install -r requirements.txt
 
-    - name: Run startmultiple.py Script
-      run: python startmultiple.py
+      - name: Run startmultiple.py Script
+        run: python startmultiple.py

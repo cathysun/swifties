@@ -30,9 +30,6 @@ urls = [
     "https://www.stubhub.com/taylor-swift-santa-clara-tickets-7-28-2023/event/151197002/?quantity=2&sections=1544068&ticketClasses=1524&seatTypes=&listingQty=",
 ]
 
-# Set the time between scrapes (in seconds)
-scrape_interval = 300  # 5 minutes
-
 # Define a function to scrape the page and return the lowest price
 def scrape_price(url):
     driver.get(url)
@@ -41,17 +38,18 @@ def scrape_price(url):
     lowest_price = min(prices)
     return lowest_price
 
-# Start scraping the pages and storing the data
-data = []
-while True:
-    prices = []
-    for url in urls:
-        price = scrape_price(url)
-        prices.append(price)
-        print(f"Scraped price ${price:.2f} from {url}")
-    lowest_price = min(prices)
-    data.append({"price": lowest_price, "time": time.time()})
-    print(f"Lowest price: ${lowest_price:.2f}")
-    with open("ticket_prices_multiple.json", "w") as f:
-        json.dump(data, f)
-    time.sleep(scrape_interval)
+# Scrape the pages and store the data
+prices = []
+for url in urls:
+    price = scrape_price(url)
+    prices.append(price)
+    print(f"Scraped price ${price:.2f} from {url}")
+
+lowest_price = min(prices)
+data = [{"price": lowest_price, "time": time.time()}]
+
+print(f"Lowest price: ${lowest_price:.2f}")
+with open("ticket_prices.json", "w") as f:
+    json.dump(data, f)
+
+driver.quit()

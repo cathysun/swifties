@@ -49,7 +49,7 @@ lowest_price = min(prices)
 data = [{"price": lowest_price, "time": time.time()}]
 
 print(f"Lowest price: ${lowest_price:.2f}")
-with open("ticket_prices.json", "w") as f:
+with open("ticket_prices_multiple.json", "w") as f:
     json.dump(data, f)
 
 driver.quit()

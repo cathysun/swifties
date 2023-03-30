@@ -1,0 +1,12 @@
+name: Check Chrome version
+
+on:
+  workflow_dispatch:
+
+jobs:
+  check_chrome_version:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Show Chrome version
+        run: google-chrome --version

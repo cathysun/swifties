@@ -1,33 +1,42 @@
-name: Scrape Ticket Prices
+name: Run startmultiple.py Script Every 10 Minutes
 
 on:
   schedule:
-    - cron: '*/10 * * * *' # Runs every 10 minutes
+    - cron: '*/10 * * * *'
   workflow_dispatch:
 
 jobs:
-  scrape:
+  build:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
-
-      - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/checkout@v3
         with:
-          python-version: '3.9'
+          ref: main
+          fetch-depth: 0
 
-      - name: Install dependencies
+      - name: Set up Node.js 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+
+      - name: Install Dependencies
         run: |
+          npm install
+          npm audit fix
           pip install -r requirements.txt
 
-
-      - name: Install Chromium and necessary packages
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y chromium-browser
-          pip install requests beautifulsoup4 pandas webdriver-manager selenium
+      - name: Installed package list
+        run: apt list --installed
+      - name: Remove Chrome
+        run: sudo apt purge google-chrome-stable
+      - name: Remove default Chromium
+        run: sudo apt purge chromium-browser
+      - name: Install a new Chromium
+        run: sudo apt install -y chromium-browser
+      - name: Install all necessary packages
+        run: pip install requests beautifulsoup4 pandas webdriver-manager selenium
 
       - name: Run startmultiple.py Script
         run: python startmultiple.py

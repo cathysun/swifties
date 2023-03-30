@@ -1,10 +1,8 @@
 import json
 import time
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-
-# Set up the web driver
-driver = webdriver.Chrome()
 
 # Set the URL of the page to scrape
 urls = [
@@ -14,6 +12,13 @@ urls = [
 
 # Set the time between scrapes (in seconds)
 scrape_interval = 300  # 5 minutes
+
+# Specify the path to the ChromeDriver executable
+chrome_driver_path = "./chromedriver.exe"
+
+# Set up the web driver
+service = Service(chrome_driver_path)
+driver = webdriver.Chrome(service=service)
 
 # Define a function to scrape the page and return the lowest price
 def scrape_price(url):

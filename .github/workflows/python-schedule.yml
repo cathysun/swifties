@@ -21,11 +21,11 @@ jobs:
       with:
         node-version: '16.x'
 
-    - name: Install Dependencies
-      run: |
-        npm install
-        npm install -g pip
-        pip install -r requirements.txt
+- name: Install Dependencies
+  run: |
+    npm install
+    npm audit fix
+    pip install -r requirements.txt
 
     - name: Run startmultiple.py Script
       run: python startmultiple.py

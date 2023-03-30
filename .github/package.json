@@ -1,0 +1,20 @@
+{
+  "name": "my-app",
+  "version": "1.0.0",
+  "description": "My awesome Node.js app",
+  "main": "startmultiple.py",
+  "dependencies": {
+    "selenium-webdriver": "^4.0.0",
+    "chromedriver": "^98.0.0",
+    "dotenv": "^10.0.0"
+  },
+  "scripts": {
+    "start": "python startmultiple.py"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/your-repo.git"
+  },
+  "author": "Your Name",
+  "license": "MIT"
+}

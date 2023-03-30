@@ -45,4 +45,4 @@ jobs:
           git config --global user.name "cathysun"
           git add ticket_prices_multiple.json
           git commit -m "Automated update of ticket prices"
-          git push
+          git push -u cathysun swifties

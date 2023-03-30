@@ -41,8 +41,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
-          git config --global user.name "$(git log --format='%an' -n 1)"
-          git config --global user.email "$(git log --format='%ae' -n 1)"
+          git config --global user.name "Cathy Sun"
+          git config --global user.email "cathy.sun36@gmail.com"
           git add ticket_prices_multiple.json
           git commit -m "Automated update of ticket prices"
           git push

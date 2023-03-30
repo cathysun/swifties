@@ -11,22 +11,19 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
         with:
-          ref: main
+          persist-credentials: false
           fetch-depth: 0
-
       - name: Set up Node.js 16.x
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v2
         with:
           node-version: '16.x'
-
       - name: Install Dependencies
         run: |
           npm install
           npm audit fix
           pip install -r requirements.txt
-
       - name: Installed package list
         run: apt list --installed
       - name: Remove Chrome
@@ -37,6 +34,15 @@ jobs:
         run: sudo apt install -y chromium-browser
       - name: Install all necessary packages
         run: pip install requests beautifulsoup4 pandas webdriver-manager selenium
-
       - name: Run startmultiple.py Script
-        run: python startmultiple.py
+        run: |
+          python startmultiple.py
+      - name: Commit Changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          git config --global user.email "cathy.sun36@gmail.com"
+          git config --global user.name "Cathy Sun"
+          git add ticket_prices_multiple.json
+          git commit -m "Automated update of ticket prices"
+          git push

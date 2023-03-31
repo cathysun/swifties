@@ -47,7 +47,13 @@ for url in urls:
     print(f"Scraped price ${price:.2f} from {url}")
 
 lowest_price = min(prices)
-data = [{"price": lowest_price, "time": time.time()}]
+current_time = time.time()
+
+# Load the existing data from the JSON file and append the new data
+with open("ticket_prices_multiple.json", "r") as f:
+    data = json.load(f)
+
+data.append({"price": lowest_price, "time": current_time})
 
 print(f"Lowest price: ${lowest_price:.2f}")
 with open("ticket_prices_multiple.json", "w") as f:

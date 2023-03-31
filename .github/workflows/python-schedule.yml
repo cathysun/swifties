@@ -8,12 +8,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      # Give the default GITHUB_TOKEN write permission to commit and push the changed files back to the repository.
-      contents: write
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
         with:
           persist-credentials: false
           fetch-depth: 0
@@ -40,7 +37,9 @@ jobs:
         run: |
           python startmultiple.py
       - name: Commit Changes
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: Automated update of ticket prices
-          file_pattern: ticket_prices_multiple.json
+        run: |
+          git config --global user.email "cathy.sun36@gmail.com"
+          git config --global user.name "cathysun"
+          git add ticket_prices_multiple.json
+          git commit -m "Automated update of ticket prices"
+          git push

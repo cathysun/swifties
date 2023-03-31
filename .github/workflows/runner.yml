@@ -1,12 +1,26 @@
-name: Check Chrome version
+name: Push to Main
 
 on:
-  workflow_dispatch:
+  push:
+    branches: [ main ]
 
 jobs:
-  check_chrome_version:
+  push:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Show Chrome version
-        run: google-chrome --version
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Make changes
+        run: echo "Hello World" > hello.txt
+
+      - name: Commit and push changes
+        uses: EndBug/add-and-commit@v7
+        with:
+          author_name: "GitHub Actions"
+          author_email: "actions@github.com"
+          message: "Add hello.txt"
+          add: "."
+          push: "true"
+          token: ${{ secrets.WORK }}

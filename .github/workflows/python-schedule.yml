@@ -42,5 +42,4 @@ jobs:
         with:
           commit_message: Automated update of ticket prices
           file_pattern: ticket_prices_multiple.json
-          commit_user_name: GitHub Actions
-          commit_user_email: actions@github.com
+

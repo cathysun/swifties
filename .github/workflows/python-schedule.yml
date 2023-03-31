@@ -1,4 +1,4 @@
-name: Run startmultiple.py Script Every 20 Minutes
+name: Run startrow.py Script Every 20 Minutes
 
 on:
   schedule:

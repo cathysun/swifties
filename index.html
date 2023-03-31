@@ -3,54 +3,59 @@
 <head>
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>Taylor Swift Eras Tour Santa Clara</title>
-
 </head>
 <body>
-<div id="table-container">
-    <h1>Taylor Swift Eras Tour</h1>
-    <h2>Santa Clara - July 28th, 2023 at 6:30PM</h2>
-    <table>
-        <tr>
-            <th>Time</th>
-            <th>Price</th>
-        </tr>
-        <tbody id="table-body">
-        </tbody>
-    </table>
-    <script>
-        function updateTimeRemaining() {
-            // Get the JSON data
-            fetch("ticket_prices_multiple.json")
-                .then(response => response.json())
-                .then(data => {
-                    // Update the table
-                    const tableBody = document.getElementById("table-body");
-                    tableBody.innerHTML = "";
-                    for (let i = 0; i < data.length; i++) {
-                        const row = document.createElement("tr");
+    <div id="table-container">
+        <h1>Taylor Swift Eras Tour</h1>
+        <h2>Santa Clara - July 28th, 2023 at 6:30PM</h2>
+        <table>
+            <tr>
+                <th>Time</th>
+                <th>Closest to stage</th>
+                <th>Rows 11+</th>
+            </tr>
+            <tbody id="table-body">
+            </tbody>
+        </table>
+        <script>
+            function updateTimeRemaining() {
+                // Get the JSON data
+                fetch("ticket_prices_rows.json")
+                    .then(response => response.json())
+                    .then(data => {
+                        // Update the table
+                        const tableBody = document.getElementById("table-body");
+                        tableBody.innerHTML = "";
+                        for (let i = 0; i < data.length; i++) {
+                            const row = document.createElement("tr");
 
-                        // Format the time in PT
-                        const timeString = new Date(data[i].time * 1000)
-                            .toLocaleString("en-US", { timeZone: "America/Los_Angeles" });
+                            // Format the time in PT
+                            const timeString = new Date(data[i].time * 1000)
+                                .toLocaleString("en-US", { timeZone: "America/Los_Angeles" });
 
-                       const price = `$${data[i].price.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
+                            const price10 = `$${data[i].lowest_price_10_or_lower.price.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
+                            const price11 = `$${data[i].lowest_price_11_or_higher.price.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
 
-                        const timeCell = document.createElement("td");
-                        timeCell.textContent = timeString;
-                        row.appendChild(timeCell);
+                            const timeCell = document.createElement("td");
+                            timeCell.textContent = timeString;
+                            row.appendChild(timeCell);
 
-                        const priceCell = document.createElement("td");
-                        priceCell.textContent = price;
-                        row.appendChild(priceCell);
+                            const price10Cell = document.createElement("td");
+                            price10Cell.textContent = price10;
+                            row.appendChild(price10Cell);
 
-                        tableBody.appendChild(row);
-                    }
-                });
-        }
+                            const price11Cell = document.createElement("td");
+                            price11Cell.textContent = price11;
+                            row.appendChild(price11Cell);
 
-        // Update the table every 5 seconds
-        setInterval(updateTimeRemaining, 5000);
-    </script>
-</div>
+                            tableBody.appendChild(row);
+                        }
+                    });
+            }
+
+            // Update the table every 5 seconds
+            setInterval(updateTimeRemaining, 5000);
+        </script>
+    </div>
 </body>
 </html>

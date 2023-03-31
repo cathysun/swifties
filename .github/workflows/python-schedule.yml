@@ -39,15 +39,7 @@ jobs:
       - name: Run startmultiple.py Script
         run: |
           python startmultiple.py
-      - name: Commit files
-        run: |
-            git config --local user.email "action@github.com"
-            git config --local user.name "GitHub Action"
-            git add -A
-            git commit -m "new data"
-
-      - name: Push changes
-        uses: ad-m/github-push-action@v0.6.0
+      - name: Commit & Push changes
+        uses: actions-js/push@master
         with:
           github_token: ${{ secrets.WORK }}
-          tags: true

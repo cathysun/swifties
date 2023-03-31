@@ -53,9 +53,4 @@ print(f"Lowest price: ${lowest_price:.2f}")
 with open("ticket_prices_multiple.json", "w") as f:
     json.dump(data, f)
 
-# Use Git commands to commit the changes to the file
-commit_message = f"Update ticket prices at {time.ctime()}"
-subprocess.run(["git", "add", "ticket_prices_multiple.json"])
-subprocess.run(["git", "commit", "-m", commit_message])
-
 driver.quit()

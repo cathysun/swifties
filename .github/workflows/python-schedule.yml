@@ -38,7 +38,7 @@ jobs:
         run: |
           python startmultiple.py
       - name: Commit Changes
-        uses: stefanzweifel/git-auto-commit-action@v4.4.3
+        uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Automated update of ticket prices
           file_pattern: ticket_prices_multiple.json

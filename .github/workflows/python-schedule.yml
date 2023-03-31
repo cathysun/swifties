@@ -38,7 +38,9 @@ jobs:
         run: |
           python startmultiple.py
       - name: Commit Changes
-        run: |
-          git add ticket_prices_multiple.json
-          git commit -m "Automated update of ticket prices"
-          git push
+        uses: stefanzweifel/git-auto-commit-action@v4.4.3
+        with:
+          commit_message: Automated update of ticket prices
+          file_pattern: ticket_prices_multiple.json
+          commit_user_name: GitHub Actions
+          commit_user_email: actions@github.com

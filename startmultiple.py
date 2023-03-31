@@ -29,6 +29,17 @@ driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
 urls = [
     "https://www.stubhub.com/taylor-swift-santa-clara-tickets-7-28-2023/event/151197002/?quantity=2&sections=1543880&ticketClasses=1524&seatTypes=&listingQty=",
     "https://www.stubhub.com/taylor-swift-santa-clara-tickets-7-28-2023/event/151197002/?quantity=2&sections=1544068&ticketClasses=1524&seatTypes=&listingQty=",
+    "https://www.stubhub.com/taylor-swift-santa-clara-tickets-7-28-2023/event/151197002/?quantity=2&sections=1544069&ticketClasses=1524&seatTypes=&listingQty=",
+    "https://www.stubhub.com/taylor-swift-santa-clara-tickets-7-28-2023/event/151197002/?quantity=2&sections=1544070&ticketClasses=1524&seatTypes=&listingQty=",
+    "https://www.stubhub.com/taylor-swift-santa-clara-tickets-7-28-2023/event/151197002/?quantity=2&sections=1544071&ticketClasses=1524&seatTypes=&listingQty=",
+    "https://www.stubhub.com/taylor-swift-santa-clara-tickets-7-28-2023/event/151197002/?quantity=2&sections=1544073&ticketClasses=1524&seatTypes=&listingQty=",
+    "https://www.stubhub.com/taylor-swift-santa-clara-tickets-7-28-2023/event/151197002/?quantity=2&sections=1544074&ticketClasses=1524&seatTypes=&listingQty=",
+    "https://www.stubhub.com/taylor-swift-santa-clara-tickets-7-28-2023/event/151197002/?quantity=2&sections=1544075&ticketClasses=1524&seatTypes=&listingQty=",
+    "https://www.stubhub.com/taylor-swift-santa-clara-tickets-7-28-2023/event/151197002/?quantity=2&sections=1544077&ticketClasses=1524&seatTypes=&listingQty=",
+    "https://www.stubhub.com/taylor-swift-santa-clara-tickets-7-28-2023/event/151197002/?quantity=2&sections=1544078&ticketClasses=1524&seatTypes=&listingQty=",
+    "https://www.stubhub.com/taylor-swift-santa-clara-tickets-7-28-2023/event/151197002/?quantity=2&sections=1544079&ticketClasses=1524&seatTypes=&listingQty=",
+    "https://www.stubhub.com/taylor-swift-santa-clara-tickets-7-28-2023/event/151197002/?quantity=2&sections=1544080&ticketClasses=1524&seatTypes=&listingQty=",
+    "https://www.stubhub.com/taylor-swift-santa-clara-tickets-7-28-2023/event/151197002/?quantity=2&sections=1544081&ticketClasses=1524&seatTypes=&listingQty="
 ]
 
 # Define a function to scrape the page and return the lowest price

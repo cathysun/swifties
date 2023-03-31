@@ -33,7 +33,7 @@
                         const timeString = new Date(data[i].time * 1000)
                             .toLocaleString("en-US", { timeZone: "America/Los_Angeles" });
 
-                        const price = `$${data[i].price.toFixed(0).replace(/\d(?=(\d{3})+\.)/g, '$&,')}`;
+                       const price = `$${data[i].price.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
 
                         const timeCell = document.createElement("td");
                         timeCell.textContent = timeString;

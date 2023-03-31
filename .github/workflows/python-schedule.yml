@@ -8,8 +8,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
 
     steps:
       - name: Checkout Repository
@@ -17,41 +15,34 @@ jobs:
         with:
           persist-credentials: false
           fetch-depth: 0
-
       - name: Set up Node.js 16.x
         uses: actions/setup-node@v2
         with:
           node-version: '16.x'
-
       - name: Install Dependencies
         run: |
           npm install
           npm audit fix
           pip install -r requirements.txt
-
       - name: Installed package list
         run: apt list --installed
-
       - name: Remove Chrome
         run: sudo apt purge google-chrome-stable
-
       - name: Remove default Chromium
         run: sudo apt purge chromium-browser
-
       - name: Install a new Chromium
         run: sudo apt install -y chromium-browser
-
       - name: Install all necessary packages
         run: pip install requests beautifulsoup4 pandas webdriver-manager selenium
-
       - name: Run startmultiple.py Script
         run: |
           python startmultiple.py
-
-      - name: Commit changes
+      - name: Commit Changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.WORK }}
         run: |
           git config --global user.name "GitHub Action"
           git config --global user.email "actions@github.com"
           git add ticket_prices_multiple.json
           git commit -m "Automated update of ticket prices"
-          git push https://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:x-access-token@github.com/cathysun/swifties.git HEAD:main
+          git push origin main

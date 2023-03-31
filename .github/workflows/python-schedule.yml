@@ -9,6 +9,9 @@ jobs:
   scheduled:
     runs-on: ubuntu-latest
 
+    env:
+      GITHUB_TOKEN: ${{ secrets.WORK }}
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -36,11 +39,15 @@ jobs:
       - name: Run startmultiple.py Script
         run: |
           python startmultiple.py
-      - name: Commit and push if it changed
-        run: |-
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config user.name "github-actions[bot]"
-          git add -A
-          timestamp=$(date -u)
-          git commit -m "Scraped at ${timestamp}" || exit 0
-          git push
+      - name: Commit files
+        run: |
+            git config --local user.email "action@github.com"
+            git config --local user.name "GitHub Action"
+            git add -A
+            git commit -m "new data"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{ github.token }}
+          tags: true
